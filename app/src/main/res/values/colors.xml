@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="weather_item_color">@android:color/white</color>
+    <color name="weather_item_text_color">@android:color/black</color>
+
+    <!-- Main screen -->
+    <color name="main_toolbar_color">#80000000</color>
+    <color name="name_border_color">#f4a316</color>
+    <color name="white">@android:color/white</color>
+    <color name="orange">@android:color/holo_orange_light</color>
+    <color name="background_color">#30000000</color>
+    <color name="black">@android:color/black</color>
+    <color name="high_temp_color">#18ff0000</color>
+    <color name="low_temp_color">#0000ff</color>
+    <color name="input_field_error_color">#cb6671</color>
+    <color name="input_field_label_color">#43484d</color>
+    <color name="rg_gold">#FDB714</color>
+    <color name="input_idle_state_color">#36000000</color>
+    <color name="input_field_hint_color">#5e6977</color>
+    <color name="input_field_border_color">#e4ebef</color>
+</resources>

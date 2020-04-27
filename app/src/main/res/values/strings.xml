@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Weather</string>
+
+    <string name="city_name">City name</string>
+    <string name="city_label">Enter city</string>
+    <string name="city_hint">Enter city</string>
+    <string name="label">city</string>
+    <string name="search">search</string>
+    <string name="search_hint">City</string>
+    <string name="bt_search">SEARCH</string>
+    <string name="temperature">TEMPERATURE, C</string>
+    <string name="date">DATE</string>
+    <string name="pressure">PRESSURE</string>
+    <string name="wind">WIND</string>
+    <string name="humidity">HUMIDITY</string>
+    <string name="clouds">CLOUDS</string>
+    <string name="temp">22.5 C</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
