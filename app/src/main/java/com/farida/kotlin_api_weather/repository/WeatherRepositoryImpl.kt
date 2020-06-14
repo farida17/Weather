@@ -1,16 +1,18 @@
 package com.farida.kotlin_api_weather.repository
 
+import com.farida.kotlin_api_weather.api.ForecastResponse
 import com.farida.kotlin_api_weather.api.OpenWeatherDataSource
 import com.farida.kotlin_api_weather.api.WeatherResponse
-import com.farida.kotlin_api_weather.common.Transformers
+import com.farida.kotlin_api_weather.common.TransformAdapter
+
 import com.farida.kotlin_api_weather.db.CityEntity
 import com.farida.kotlin_api_weather.db.WeatherDatabase
 import com.farida.kotlin_api_weather.entity.CurrentWeather
+import com.farida.kotlin_api_weather.entity.Forecast
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
@@ -25,7 +27,14 @@ class WeatherRepositoryImpl @Inject constructor(
     override fun getWeather(cityName: String): Single<CurrentWeather> {
         return openWeatherDataSource.loadWeatherByCityName(cityName = cityName)
             .map { weatherResponse: WeatherResponse ->
-                Transformers.transformToCurrentWeather(cityName, weatherResponse)
+                TransformAdapter.transformToCurrentWeather(cityName, weatherResponse)
+            }
+    }
+
+    override fun getFiveDaysForecast(cityName: String): Single<Forecast> {
+        return openWeatherDataSource.loadForecastByCityName(cityName = cityName)
+            .map { forecastResponse: ForecastResponse ->
+                TransformAdapter.transformToForecast(cityName, forecastResponse)
             }
     }
 

@@ -1,5 +1,6 @@
 package com.farida.kotlin_api_weather.api
 
+
 data class WeatherResponse(
     val dt: Long,
     val coord: Coord,
@@ -21,3 +22,12 @@ data class Clouds(val all: Int)
 data class Wind(val speed: Double, val deg: Double, val gust: Double)
 
 data class WeatherInfo(val main: String, val description: String, val icon: String)
+
+data class ForecastResponse(val city: CityForecast,
+                            val list: List<WeatherResponse>)
+
+data class CityForecast(val name: String,
+                        val coord: Coord,
+                        val country: String,
+                        val population: Double)
+

@@ -2,7 +2,9 @@ package com.farida.kotlin_api_weather.ui
 
 import android.app.Activity
 import android.content.Context
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.farida.kotlin_api_weather.repository.WeatherRepository
 import javax.inject.Inject
@@ -11,17 +13,15 @@ class WeatherViewModel @Inject constructor(private val weatherRepository: Weathe
 
     fun getWeather(cityName: String) = weatherRepository.getWeather(cityName)
 
-    fun convertKelvinToCelsius(temp: Double?): Int {
-        val celsiusTemp = (temp!! - 273)
-        return celsiusTemp.toInt()
-    }
-    fun convertIconIdToUrl(icon: String) = "https://openweathermap.org/img/w/$icon.png"
+    fun getFiveDaysForecast(cityName: String) = weatherRepository.getFiveDaysForecast(cityName)
 
-    fun hideKeyboard(activity: Activity) {
-        val view = activity.currentFocus
-        if (view != null) {
-            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+    fun hideSoftKeyBoard(context: Context, view: View) {
+        try {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
+
 }

@@ -1,6 +1,6 @@
 package com.farida.kotlin_api_weather.di
 
-import com.farida.kotlin_api_weather.ui.SearchCityActivity
+import com.farida.kotlin_api_weather.ui.WeatherActivity
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
@@ -14,5 +14,6 @@ import javax.inject.Singleton
     OpenWeatherServiceModule::class])
 
 interface ApplicationComponent {
-    fun inject(searchCityActivity: SearchCityActivity)
+
+    fun inject(weatherActivity: WeatherActivity)
 }

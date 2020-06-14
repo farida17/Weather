@@ -7,4 +7,7 @@ import javax.inject.Inject
 class OpenWeatherDataSource @Inject constructor(private val openWeatherService: OpenWeatherService) {
     fun loadWeatherByCityName(cityName: String): Single<WeatherResponse> =
         openWeatherService.loadWeatherByCityName(cityName, API_KEY)
+
+    fun loadForecastByCityName(cityName: String): Single<ForecastResponse> =
+        openWeatherService.loadFiveDaysForecastByCityName(cityName, API_KEY)
 }
