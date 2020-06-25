@@ -4,7 +4,7 @@
     <color name="weather_item_text_color">@android:color/black</color>
 
     <!-- Main screen -->
-    <color name="main_toolbar_color">#80000000</color>
+    <color name="main_toolbar_color">#1300AA</color>
     <color name="name_border_color">#f4a316</color>
     <color name="white">@android:color/white</color>
     <color name="orange">@android:color/holo_orange_light</color>
