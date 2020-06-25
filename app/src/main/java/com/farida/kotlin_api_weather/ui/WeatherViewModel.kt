@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository): ViewModel() {
 
-    val newCityName = MutableLiveData<String>()
+    private val newCityName = MutableLiveData<String>()
 
     fun selectCityName(cityName: String) {
         newCityName.value = cityName
