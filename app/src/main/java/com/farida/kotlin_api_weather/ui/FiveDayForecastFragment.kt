@@ -6,18 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.farida.kotlin_api_weather.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers.io
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.five_day_forecast_fragment.*
 
 class FiveDayForecastFragment : Fragment() {
 
     private lateinit var viewModel: WeatherViewModel
     private lateinit var weatherAdapter: WeatherAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,10 @@ class FiveDayForecastFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(WeatherViewModel::class.java)
         initRecyclerView()
-        setFiveDayForecastObserver("London")
+        viewModel.getCityName().observe(viewLifecycleOwner, Observer {
+            setFiveDayForecastObserver(it)
+        })
+        //setFiveDayForecastObserver("London")
     }
 
     private fun initRecyclerView() {

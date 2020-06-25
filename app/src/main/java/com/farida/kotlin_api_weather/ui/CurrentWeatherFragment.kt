@@ -41,7 +41,7 @@ class CurrentWeatherFragment : Fragment() {
             val cityName = searchCity?.city?.text.toString()
             context?.let { it1 -> viewModel.hideSoftKeyBoard(it1, view) }
             setCurrentWeatherObserver(cityName)
-
+            viewModel.selectCityName(cityName)
         }
         searchCity.city.addTextChangedListener( object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -69,8 +69,7 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun setCurrentWeatherObserver(cityName: String): Disposable? {
-         return viewModel.run {
-            getWeather(cityName)
+         return viewModel.getWeather(cityName)
                 .subscribeOn(io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
@@ -80,7 +79,6 @@ class CurrentWeatherFragment : Fragment() {
                 Log.d(tag, throwable.toString())
                 city.error = "Not found. Try another city"
             }
-         }
     }
 
     @SuppressLint("SetTextI18n")
