@@ -1,37 +1,46 @@
 package com.farida.kotlin_api_weather.ui
 
-import android.app.Activity
-import android.content.Context
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.farida.kotlin_api_weather.entity.CurrentWeather
+import com.farida.kotlin_api_weather.entity.Forecast
 import com.farida.kotlin_api_weather.repository.WeatherRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class WeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository): ViewModel() {
 
-    private val newCityName = MutableLiveData<String>()
+    val currentWeather: MutableLiveData<CurrentWeather> = MutableLiveData()
 
-    fun selectCityName(cityName: String) {
-        newCityName.value = cityName
+    val forecast: MutableLiveData<Forecast> = MutableLiveData()
+
+    private var lastSubscription1: Disposable? = null
+    private var lastSubscription2: Disposable? = null
+
+    fun loadCurrentWeather(cityName: String) {
+        lastSubscription1?.dispose()
+        lastSubscription1 = weatherRepository.getWeather(cityName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { t: CurrentWeather? ->
+                currentWeather.postValue(t)
+            }
     }
-    fun getCityName(): LiveData<String> {
-        return newCityName
+    fun loadForecast(cityName: String) {
+        lastSubscription2?.dispose()
+        lastSubscription2 = weatherRepository.getFiveDaysForecast(cityName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { t: Forecast? ->
+                forecast.postValue(t)
+            }
     }
 
-    fun getWeather(cityName: String) = weatherRepository.getWeather(cityName)
-
-    fun getFiveDaysForecast(cityName: String) = weatherRepository.getFiveDaysForecast(cityName)
-
-    fun hideSoftKeyBoard(context: Context, view: View) {
-        try {
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    override fun onCleared() {
+        super.onCleared()
+        lastSubscription1?.dispose()
+        lastSubscription2?.dispose()
     }
-
 }

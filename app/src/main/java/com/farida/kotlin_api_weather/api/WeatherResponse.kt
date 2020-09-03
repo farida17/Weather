@@ -9,7 +9,9 @@ data class WeatherResponse(
     val wind: Wind,
     val dt_txt: String,
     val name: String,
-    val weather: List<WeatherInfo>
+    val weather: List<WeatherInfo>,
+    val sys: Sys,
+    val timezone: Int
 )
 
 
@@ -30,4 +32,8 @@ data class CityForecast(val name: String,
                         val coord: Coord,
                         val country: String,
                         val population: Double)
+
+data class Sys(val country: String,
+               val sunrise: Long,
+               val sunset: Long)
 

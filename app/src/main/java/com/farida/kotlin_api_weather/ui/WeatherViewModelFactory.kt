@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.farida.kotlin_api_weather.repository.WeatherRepository
 import javax.inject.Inject
 
+@Suppress("UNCHECKED_CAST")
 class WeatherViewModelFactory @Inject constructor(private val weatherRepository: WeatherRepository) : ViewModelProvider.Factory {
 
-    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(WeatherViewModel::class.java)) {
             return WeatherViewModel(weatherRepository) as T
