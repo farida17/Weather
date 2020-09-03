@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WEATHER TODAY</string>
+    <string name="app_name">WEATHER</string>
 
     <string name="city_name">City name</string>
     <string name="city_label">Enter city</string>
@@ -24,4 +24,10 @@
     <string name="previous">Previous</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="local_time">LOCAL TIME</string>
+    <string name="sunrise">SUNRISE</string>
+    <string name="geo">COORDS</string>
+    <string name="sunset">SUNSET</string>
+    <string name="feels_like">FEELS LIKE</string>
+    <string name="city">City</string>
 </resources>

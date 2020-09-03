@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.farida.kotlin_api_weather.R
 import com.farida.kotlin_api_weather.common.TransformAdapter.convertIconIdToUrl
 import com.farida.kotlin_api_weather.common.TransformAdapter.convertKelvinToCelsius
+import com.farida.kotlin_api_weather.common.TransformAdapter.convertStringToDateTime
 import com.farida.kotlin_api_weather.entity.CurrentWeather
 import kotlinx.android.synthetic.main.list_item.view.*
 
@@ -27,15 +28,14 @@ class WeatherAdapter : ListAdapter<CurrentWeather, WeatherAdapter.ViewHolder>(DI
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         @SuppressLint("SetTextI18n")
         fun bind(forecastElement: CurrentWeather) {
             with(forecastElement) {
-                itemView.day_name_text_view.text = dt_txt
+                itemView.day_name_text_view.text = dt_txt?.let { convertStringToDateTime(it) }
                 itemView.date_text_view.text = weather?.get(0)?.description
-                itemView.max_temp_text_view.text =
-                    "${convertKelvinToCelsius(main?.temp_max)}℃"
-                itemView.min_temp_text_view.text =
-                    "${convertKelvinToCelsius(main?.temp_min)}℃"
+                itemView.temp_text_view.text =
+                    convertKelvinToCelsius(main?.temp).toString() + " ℃"
                 Glide.with(itemView.context)
                     .load(convertIconIdToUrl(weather?.get(0)?.icon))
                     .into(itemView.weather_image_view)

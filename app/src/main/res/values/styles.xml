@@ -16,4 +16,18 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyImageViewStyle.Style">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="MyImageViewStyle">imageView_style</style>
+
+    <style name="MyBackground.Style">
+        <item name="backgroundColor">#d3d3d3</item>
+    </style>
+
+    <style name="MyBackground">backgroundStyle</style>
 </resources>
